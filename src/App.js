@@ -1,29 +1,47 @@
 import React, { Component } from "react";
 import './App.css';
 import data from './data.json'
+import Table from "./components/table";
+import TableSlider from "./components/tableSlider";
+
 
 class App extends Component {
+
+  constructor(props){
+    
+    let ordered = data.sort((x,y) => x.year - y.year); 
+    let min = ordered[0]["year"];
+    let max = ordered[data.length-1]["year"];
+
+    super(props);
+
+    this.state = {
+      data: ordered,
+      min: min,
+      max: max,
+      range: [min, max]
+    }; 
+  }
+
+  handleSlider = range => {
+    this.setState({ range });
+  };
+
   render() {
+    const { range } = this.state;
   return (
     <div className="App">
-      <table>
-        <tbody>
-        <tr>
-          <th>Year</th>
-          <th>Total Return</th>
-          <th>Cumulative Returns</th>
-        </tr>
-          {data.map(data => {
-                  return (
-                <tr key={data.year}>
-                    <td>{data.year}</td>
-                    <td>{data.totalReturn}</td>
-                </tr>
-                 );
-                })}
-        </tbody>
-      </table>
-    </div>
+          <TableSlider
+            min={this.state.min}
+            max={this.state.max}
+            value={range}
+            onChange={this.handleSlider}
+            />
+          <Table
+            data={this.state.data}
+            range={range}
+          />
+        </div>
   );
 }
 }
