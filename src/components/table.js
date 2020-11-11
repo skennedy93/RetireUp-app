@@ -2,9 +2,13 @@ import React from 'react';
 
 export default function Table(props){
 
-    let min = props.range[1]-1925;
-    let max = props.range[0]-1926;
-    let info = props.data.slice(max, min);
+// setting the minimum and maximum numbers on the range by subtracting years from the selected numbers on the slider
+// this will allow me to use the slice method on those selected years to filter out anything that is not in between the 
+// two selected years on the slider
+
+    let max = props.range[1]-1925; 
+    let min = props.range[0]-1926;
+    let info = props.data.slice(min, max);
 
     return(
         <table>
