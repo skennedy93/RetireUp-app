@@ -9,15 +9,18 @@ export default function TableSlider(props) {
 
   const min = props.min;
   const max = props.max;
+  const marks = {1926:min, 2019:max};
+  const sliderStyle = { marginBottom: 25};
 
   return (
-      <div>
+      <div style = {sliderStyle}>
         <Range
         min={min}
         max={max}
         value={props.value}
         onChange={props.onChange}
         allowCross = {false}
+        marks={marks}
         />
       </div>
     );

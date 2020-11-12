@@ -33,6 +33,7 @@ class App extends Component {
     const { range } = this.state;
   return (
     <div className="App">
+          <h2>S&P 500 Total Returns</h2>
           <TableSlider
             min={this.state.min}
             max={this.state.max}
