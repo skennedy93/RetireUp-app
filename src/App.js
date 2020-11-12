@@ -9,6 +9,8 @@ class App extends Component {
 
   constructor(props){
     
+//ordered will sort the data ascending instead of descending.
+//min and max will set our starting points for the slider by selecting the first and last year in the data provided.
     let ordered = data.sort((x,y) => x.year - y.year); 
     let min = ordered[0]["year"];
     let max = ordered[data.length-1]["year"];

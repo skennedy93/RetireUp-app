@@ -3,9 +3,8 @@ import styled from 'styled-components'
 
 export default function Table(props){
     const Table = styled.table`
-    width: 75%; 
+    width: 100%; 
     border-collapse: collapse; 
-    margin: auto;
     `
     const TableHeader = styled.th`
     background: #333; 
@@ -24,6 +23,19 @@ export default function Table(props){
     let max = props.range[1]-1925; 
     let min = props.range[0]-1926;
     let info = props.data.slice(min, max);
+    
+
+// going through every total return filtered by the slider and adding or subtracting to the total amount depending on if the
+// number is positive or negative. toFixed will give us the 2 digits after the decimal.
+    const cumulativeReturns = (num) => {
+        let count = 0;
+        let sum = 0;
+        for(let i = 0; i <= num; i++){
+          count += Number(info[i].totalReturn)
+          sum = count.toFixed(2)
+        }
+        return sum
+      }
 
     return(
         <Table>
@@ -34,10 +46,11 @@ export default function Table(props){
                 <TableHeader>Cumulative Returns</TableHeader>
             </tr>
                 {
-                    info.map(data => (
+                    info.map((data, index) => (
                         <tr key={data.year}>
                             <TableData>{data.year}</TableData>
                             <TableData>{data.totalReturn}</TableData>
+                            <TableData>{cumulativeReturns(index)}</TableData>
                         </tr>
                     ))
                 }
